@@ -94,8 +94,8 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (status !== "right") return;
-    const t = setTimeout(next, 1800);
+    if (status === "idle") return;
+    const t = setTimeout(next, status === "right" ? 1800 : 900);
     return () => clearTimeout(t);
   }, [status, next]);
 
