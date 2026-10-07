@@ -1,5 +1,5 @@
 * { box-sizing: border-box; }
-body { margin: 0; font-family: "Comic Sans MS"; background: linear-gradient(135deg, #ffdeeb, #d0ebff 50%, #fff3bf); min-height: 100vh; overflow-x: hidden; }
+body { margin: 0; font-family: "Comic Neue", "Comic Sans MS", cursive; background: linear-gradient(135deg, #ffdeeb, #d0ebff 50%, #fff3bf); min-height: 100vh; overflow-x: hidden; }
 .app { min-height: 100vh; max-width: 900px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; }
 .top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
 .top-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
