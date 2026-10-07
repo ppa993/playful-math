@@ -27,7 +27,7 @@ body { margin: 0; font-family: "Comic Neue", "Comic Sans MS"; background: linear
 .praise { color: #2b8a3e; display: inline-block; animation: bounce .6s infinite alternate; }
 .try { color: #f76707; }
 .ask { color: #868e96; font-size: 1.8rem; }
-.options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+.options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 @media (max-width: 600px) { .options { grid-template-columns: repeat(2, 1fr); } .num { font-size: 3.5rem; min-width: 70px; } .op { font-size: 3rem; } .title { font-size: 2.2rem; } }
 .opt { font-family: inherit; font-size: 4.5rem; font-weight: 700; color: #fff; border: none; border-radius: 32px; padding: 18px 0; cursor: pointer; box-shadow: 0 10px 0 rgba(0,0,0,.18); transition: transform .1s; text-shadow: 2px 2px 0 rgba(0,0,0,.15); }
 .opt:hover { transform: translateY(-4px) scale(1.04); }

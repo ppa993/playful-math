@@ -85,7 +85,7 @@ export default function App() {
   const [wrong, setWrong] = useState<number[]>([]);
   const [praise, setPraise] = useState("");
   const [shakeKey, setShakeKey] = useState(0);
-  const [showAids, setShowAids] = useState(true);
+  const [showAids, setShowAids] = useState(false);
 
   const next = useCallback(() => {
     setP(makeProblem());
@@ -118,12 +118,11 @@ export default function App() {
     <div className="app">
       {status === "right" && <Confetti key={stars} />}
       <header className="top">
-        <h1 className="title">Math Fun!</h1>
+        <h1 className="title" onDoubleClick={() => setShowAids((visible) => !visible)}>Math Fun!</h1>
         <div className="top-actions">
           <button
             className="stars"
             type="button"
-            onDoubleClick={() => setShowAids((visible) => !visible)}
             aria-pressed={showAids}
             aria-label="Double-click to show or hide aids"
           >
