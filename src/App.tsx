@@ -180,10 +180,6 @@ export default function App() {
             );
           })}
         </div>
-
-        {status === "right" && (
-          <button className="next" onClick={next}>Next Question ➔</button>
-        )}
       </main>
     </div>
   );
