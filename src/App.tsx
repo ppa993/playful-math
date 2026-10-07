@@ -121,14 +121,14 @@ export default function App() {
         <h1 className="title">Math Fun!</h1>
         <div className="top-actions">
           <button
-            className="aids-toggle"
+            className="stars"
             type="button"
-            onClick={() => setShowAids((visible) => !visible)}
+            onDoubleClick={() => setShowAids((visible) => !visible)}
             aria-pressed={showAids}
+            aria-label="Double-click to show or hide aids"
           >
-            {showAids ? "🙈 Hide Aids" : "👀 Show Aids"}
+            ⭐ {stars} {stars === 1 ? "Star" : "Stars"}!
           </button>
-          <div className="stars" key={stars}>⭐ {stars} {stars === 1 ? "Star" : "Stars"}!</div>
         </div>
       </header>
 
