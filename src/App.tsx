@@ -28,9 +28,10 @@ function makeProblem(previousKey?: string): Problem {
 }
 
 let ctx: AudioContext | null = null;
-function beep(freqs: number[], dur = 0.12) {
+async function beep(freqs: number[], dur = 0.12) {
   try {
     ctx = ctx || new AudioContext();
+    if (ctx.state === "suspended") await ctx.resume();
     freqs.forEach((f, i) => {
       const o = ctx!.createOscillator();
       const g = ctx!.createGain();
