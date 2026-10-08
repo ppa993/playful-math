@@ -22,7 +22,7 @@ function makeProblem(previousKey?: string): Problem {
   }
   if (previousKey === problemKey(a, b, op)) return makeProblem(previousKey);
   const set = new Set([answer]);
-  while (set.size < 4) set.add(rand(20) + 1);
+  while (set.size < 4) set.add(rand(10) + 1);
   const options = [...set].sort(() => Math.random() - 0.5);
   return { a, b, op, answer, options, emoji: EMOJIS[rand(EMOJIS.length)] };
 }
