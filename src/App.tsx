@@ -6,21 +6,23 @@ const EMOJIS = ["🍎", "⭐", "🐟", "🍓", "🎈", "🐞", "🍪", "🌸"];
 const PRAISE = ["Great Job!", "Awesome!", "Super Star!", "You Did It!", "Amazing!", "Wow!"];
 const BTN_COLORS = ["#ff6b9d", "#4dabf7", "#ffa94d", "#9775fa"];
 const rand = (n: number) => Math.floor(Math.random() * n);
+const problemKey = (a: number, b: number, op: Problem["op"]) => `${a}${op}${b}`;
 
-function makeProblem(): Problem {
+function makeProblem(previousKey?: string): Problem {
   const op = Math.random() < 0.5 ? "+" : "-";
   let a: number, b: number, answer: number;
   if (op === "+") {
-    a = rand(11);
-    b = rand(11 - a);
+    a = rand(10) + 1;
+    b = rand(10) + 1;
     answer = a + b;
   } else {
-    a = rand(11);
-    b = rand(a + 1);
+    a = rand(9) + 2;
+    b = rand(a - 1) + 1;
     answer = a - b;
   }
+  if (previousKey === problemKey(a, b, op)) return makeProblem(previousKey);
   const set = new Set([answer]);
-  while (set.size < 4) set.add(rand(11));
+  while (set.size < 4) set.add(rand(20) + 1);
   const options = [...set].sort(() => Math.random() - 0.5);
   return { a, b, op, answer, options, emoji: EMOJIS[rand(EMOJIS.length)] };
 }
@@ -88,7 +90,7 @@ export default function App() {
   const [showAids, setShowAids] = useState(false);
 
   const next = useCallback(() => {
-    setP(makeProblem());
+    setP((current) => makeProblem(problemKey(current.a, current.b, current.op)));
     setStatus("idle");
     setWrong([]);
   }, []);
