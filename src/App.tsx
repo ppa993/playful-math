@@ -28,19 +28,36 @@ function makeProblem(previousKey?: string): Problem {
 }
 
 let ctx: AudioContext | null = null;
-async function beep(freqs: number[], dur = 0.12) {
+function getAudioContext() {
+  if (ctx) return ctx;
+  const AudioContextClass = window.AudioContext ||
+    (window as typeof window & { webkitAudioContext?: typeof AudioContext }).webkitAudioContext;
+  if (!AudioContextClass) return null;
+  ctx = new AudioContextClass();
+  return ctx;
+}
+
+function unlockAudio() {
   try {
-    ctx = ctx || new AudioContext();
-    if (ctx.state === "suspended") await ctx.resume();
+    const audioContext = getAudioContext();
+    if (audioContext?.state === "suspended") void audioContext.resume();
+  } catch {}
+}
+
+function beep(freqs: number[], dur = 0.12) {
+  try {
+    const audioContext = getAudioContext();
+    if (!audioContext) return;
+    if (audioContext.state === "suspended") void audioContext.resume();
     freqs.forEach((f, i) => {
-      const o = ctx!.createOscillator();
-      const g = ctx!.createGain();
+      const o = audioContext.createOscillator();
+      const g = audioContext.createGain();
       o.frequency.value = f;
       o.type = "triangle";
-      const t = ctx!.currentTime + i * dur;
+      const t = audioContext.currentTime + i * dur;
       g.gain.setValueAtTime(0.2, t);
       g.gain.exponentialRampToValueAtTime(0.001, t + dur);
-      o.connect(g).connect(ctx!.destination);
+      o.connect(g).connect(audioContext.destination);
       o.start(t);
       o.stop(t + dur);
     });
@@ -174,6 +191,7 @@ export default function App() {
               <button
                 key={v}
                 onClick={() => pick(v)}
+                onPointerDown={unlockAudio}
                 className={`opt ${isWrong ? "used" : ""} ${isRight ? "correct" : ""}`}
                 style={{ background: isRight ? "#51cf66" : BTN_COLORS[i] }}
                 disabled={isWrong}
