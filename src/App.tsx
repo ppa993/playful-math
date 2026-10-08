@@ -12,8 +12,8 @@ function makeProblem(previousKey?: string): Problem {
   const op = Math.random() < 0.5 ? "+" : "-";
   let a: number, b: number, answer: number;
   if (op === "+") {
-    a = rand(10) + 1;
-    b = rand(10) + 1;
+    a = rand(9) + 1;
+    b = rand(10 - a) + 1;
     answer = a + b;
   } else {
     a = rand(9) + 2;
