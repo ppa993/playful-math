@@ -148,8 +148,8 @@ export default function App() {
   }, [p.a, p.b, p.op]);
 
   useEffect(() => {
-    if (status === "idle") return;
-    const t = setTimeout(next, status === "right" ? 1800 : 900);
+    if (status !== "right") return;
+    const t = setTimeout(next, 1800);
     return () => clearTimeout(t);
   }, [status, next]);
 
@@ -166,6 +166,7 @@ export default function App() {
       setStatus("wrong");
       setWrong((w) => [...w, v]);
       setShakeKey((k) => k + 1);
+      speak("Oops! Try again!");
       beep([300, 220], 0.15);
     }
   };
