@@ -8,6 +8,18 @@ import App from "./App";
 
 registerSW({ immediate: true });
 
+if ("serviceWorker" in navigator) {
+  const checkForUpdate = () => {
+    if (document.visibilityState !== "visible") return;
+    void navigator.serviceWorker.ready
+      .then((registration) => registration.update())
+      .catch(() => {});
+  };
+
+  window.addEventListener("focus", checkForUpdate);
+  document.addEventListener("visibilitychange", checkForUpdate);
+}
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <App />
