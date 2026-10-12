@@ -408,7 +408,6 @@ export default function App() {
 
       {!hasStarted ? (
         <div className="start-screen">
-          <p className="ask">Chọn chế độ chơi</p>
           <button className="start-button" type="button" onClick={startGame}>Bắt đầu</button>
         </div>
       ) : (
