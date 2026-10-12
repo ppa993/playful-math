@@ -378,7 +378,6 @@ export default function App() {
       <div className="background-decor" aria-hidden="true">
         <span className="bg-cloud bg-cloud-left">☁️</span>
         <span className="bg-cloud bg-cloud-right">☁️</span>
-        <span className="bg-rainbow">🌈</span>
         <span className="bg-sun">☀️</span>
       </div>
       {status === "right" && <Confetti key={stars} />}

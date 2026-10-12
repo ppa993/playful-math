@@ -4,10 +4,9 @@ body { margin: 0; font-family: "Comic Neue", "Comic Sans MS"; background: linear
 .background-decor { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; opacity: .4; }
 .bg-cloud, .bg-rainbow, .bg-sun { position: absolute; display: block; }
 .bg-cloud { font-size: 3.75rem; animation: float-slow 4s ease-in-out infinite; }
-.bg-cloud-left { top: 2.5rem; left: 2.5rem; }
-.bg-cloud-right { top: 6rem; right: 4rem; font-size: 3.125rem; animation-name: float-reverse; }
-.bg-rainbow { bottom: 2rem; left: 4rem; font-size: 4.5rem; animation: float-slow 4s ease-in-out infinite; }
-.bg-sun { top: 1rem; left: 50%; font-size: 4.5rem; opacity: .3; animation: spin-slow 30s linear infinite; }
+.bg-cloud-left { top: 7.5rem; left: 2.5rem; }
+.bg-cloud-right { top: 10rem; right: 4rem; font-size: 3.125rem; animation-name: float-reverse; }
+.bg-sun { top: 8rem; left: 50%; font-size: 4.5rem; opacity: .3; animation: spin-slow 30s linear infinite; }
 .top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
 .top-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
 .title { margin: 0; font-size: 3rem; color: #ff6b9d; text-shadow: 3px 3px 0 #fff, 5px 5px 0 #ffc9de; animation: bob 2s ease-in-out infinite; }
