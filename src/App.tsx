@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 type Problem = { a: number; b: number; op: "+" | "-"; answer: number; options: number[]; emoji: string };
 type GameMode = "mixed" | "addition" | "subtraction";
@@ -130,6 +130,14 @@ export default function App() {
   const [praise, setPraise] = useState("");
   const [shakeKey, setShakeKey] = useState(0);
   const [showAids] = useState(false);
+  const audioUnlocked = useRef(false);
+  const unlockAndStartAudio = () => {
+    unlockAudio();
+    if (!audioUnlocked.current) {
+      audioUnlocked.current = true;
+      speak(`What is ${p.a} ${p.op === "+" ? "plus" : "minus"} ${p.b}?`);
+    }
+  };
   const next = useCallback(() => {
     setP((current) => makeProblem(problemKey(current.a, current.b, current.op), gameMode));
     setStatus("idle");
@@ -144,6 +152,7 @@ export default function App() {
   };
 
   useEffect(() => {
+    if (!audioUnlocked.current) return;
     speak(`What is ${p.a} ${p.op === "+" ? "plus" : "minus"} ${p.b}?`);
   }, [p.a, p.b, p.op]);
 
@@ -155,6 +164,7 @@ export default function App() {
 
   const pick = (v: number) => {
     if (status === "right" || wrong.includes(v)) return;
+    unlockAndStartAudio();
     if (v === p.answer) {
       setStatus("right");
       setStars((s) => s + 1);
@@ -172,7 +182,7 @@ export default function App() {
   };
 
   return (
-    <div className="app">
+    <div className="app" onPointerDownCapture={unlockAndStartAudio} onClickCapture={unlockAndStartAudio}>
       <div className="background-decor" aria-hidden="true">
         <span className="bg-cloud bg-cloud-left">☁️</span>
         <span className="bg-cloud bg-cloud-right">☁️</span>
@@ -245,7 +255,6 @@ export default function App() {
               <button
                 key={v}
                 onClick={() => pick(v)}
-                onPointerDown={unlockAudio}
                 className={`opt ${isWrong ? "used" : ""} ${isRight ? "correct" : ""}`}
                 style={{ background, "--opt-shadow": shadow }}
                 disabled={isWrong}

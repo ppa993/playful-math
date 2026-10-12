@@ -16,7 +16,7 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
-      includeAssets: ["icon.svg"],
+      includeAssets: ["icon.svg", "icon-192.png", "icon-512.png"],
       manifest: {
         name: "Math Fun!",
         short_name: "Math Fun",
@@ -24,12 +24,19 @@ export default defineConfig({
         theme_color: "#ff6b9d",
         background_color: "#ffdeeb",
         display: "standalone",
-        start_url: "/",
+        start_url: "./",
+        scope: "./",
         icons: [
           {
-            src: "/icon.svg",
-            sizes: "any",
-            type: "image/svg+xml",
+            src: "icon-192.png",
+            sizes: "192x192",
+            type: "image/png",
+            purpose: "any",
+          },
+          {
+            src: "icon-512.png",
+            sizes: "512x512",
+            type: "image/png",
             purpose: "any maskable",
           },
         ],
